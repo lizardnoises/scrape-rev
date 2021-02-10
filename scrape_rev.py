@@ -53,7 +53,9 @@ def write_entries(entries, filename):
 if __name__ == '__main__':
     archive_url = "https://www.revolutionspodcast.com/archives.html"
     archive_links = get_archive_links(archive_url)
+    for link in archive_links:
+        download_mp3_links(link)
     entries = reversed([entry
                         for link in archive_links
                         for entry in get_entries(link)])
-    write_entries(entries, 'test.txt')
+    write_entries(entries, 'entries.txt')
