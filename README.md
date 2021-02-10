@@ -5,7 +5,7 @@ A simple script to scrape all mp3s and titles from the [Revolutions Podcast](htt
 ## Usage
 
 ```bash
-python scrape_revolutions.py
+python scrape_rev.py
 ```
 
 ## License
