@@ -5,13 +5,16 @@ import itertools
 def get_archive_links(archive_url):
     r = requests.get(archive_url)
     soup = BeautifulSoup(r.content, 'lxml')
-    links = [item.a['href'] for item in soup.find_all(class_='archive-list-item')]
+    links = [item.a['href']
+             for item in soup.find_all(class_='archive-list-item')]
     return links
 
 def get_mp3_links(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'lxml')
-    links = [a['href'] for a in soup.find(id='beta-inner').find_all('a') if a['href'].endswith('mp3')]
+    links = [a['href']
+             for a in soup.find(id='beta-inner').find_all('a')
+             if a['href'].endswith('mp3')]
     return links
 
 def download_link(url):
@@ -35,7 +38,8 @@ def get_entry(element):
 def get_entries(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'lxml')
-    entries = [get_entry(entry) for entry in soup.find_all(class_='entry-inner')]
+    entries = [get_entry(entry)
+               for entry in soup.find_all(class_='entry-inner')]
     return entries
 
 def format_entries(entries):
@@ -49,5 +53,7 @@ def write_entries(entries, filename):
 if __name__ == '__main__':
     archive_url = "https://www.revolutionspodcast.com/archives.html"
     archive_links = get_archive_links(archive_url)
-    entries = reversed([entry for link in archive_links for entry in get_entries(link)])
+    entries = reversed([entry
+                        for link in archive_links
+                        for entry in get_entries(link)])
     write_entries(entries, 'test.txt')
